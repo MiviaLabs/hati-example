@@ -14,7 +14,7 @@ import (
 
 func main() {
 	hati := hati.New(core.Config{
-		Name: "test-app",
+		Name: "example-app",
 		Transport: transport.TransportManagerConfig{
 			Redis: transport.RedisConfig{
 				On:       true,
