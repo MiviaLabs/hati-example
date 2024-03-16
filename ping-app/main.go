@@ -6,15 +6,15 @@ import (
 	"syscall"
 
 	"github.com/MiviaLabs/hati"
+	"github.com/MiviaLabs/hati-test/ping-app/modules"
 	"github.com/MiviaLabs/hati/core"
 	"github.com/MiviaLabs/hati/log"
-	"github.com/MiviaLabs/hati/module"
 	"github.com/MiviaLabs/hati/transport"
 )
 
 func main() {
 	hati := hati.New(core.Config{
-		Name: "example-app",
+		Name: "ping-app",
 		Transport: transport.TransportManagerConfig{
 			Redis: transport.RedisConfig{
 				On:       true,
@@ -23,13 +23,17 @@ func main() {
 				Username: "",
 				Password: "",
 				Database: 0,
+				Protocol: 3,
+				PoolSize: 40,
 			},
 		},
 	})
 
-	m := module.New("test")
+	m := modules.PingModule()
 
-	hati.AddModule(m)
+	if err := hati.AddModule(*m); err != nil {
+		panic(err)
+	}
 
 	if err := hati.Start(); err != nil {
 		panic(err)
