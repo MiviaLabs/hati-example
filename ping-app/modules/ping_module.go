@@ -36,7 +36,7 @@ func PingModule() *interfaces.Module {
 						continue
 					}
 
-					response, err := (tm).Send(transport.REDIS_TYPE, "pong-app", "pingpong", "pong", []byte(`ping`), true)
+					response, err := (tm).Send(transport.REDIS_TYPE, "pong-app", "pingpong", "pong", []byte(`ping`), true, "")
 					if err != nil {
 						log.Error(err.Error())
 					}
