@@ -6,8 +6,6 @@ import (
 	"time"
 
 	"github.com/MiviaLabs/hati/common/interfaces"
-	"github.com/MiviaLabs/hati/common/structs"
-	"github.com/MiviaLabs/hati/common/types"
 	"github.com/MiviaLabs/hati/log"
 	"github.com/MiviaLabs/hati/module"
 	"github.com/MiviaLabs/hati/transport"
@@ -25,10 +23,15 @@ func PingModule() *interfaces.Module {
 		wg.Add(1)
 
 		go func(w *sync.WaitGroup, cc chan bool, mod interfaces.Module) {
-			ticker := time.NewTicker(3 * time.Second)
+			ticker := time.NewTicker(25 * time.Microsecond)
+			ticker2 := time.NewTicker(5 * time.Second)
+			counter := 0
 
 			for {
 				select {
+				case <-ticker2.C:
+					fmt.Println(counter)
+					continue
 				case <-ticker.C:
 					tm := mod.GetTransportManager()
 					if tm == nil {
@@ -36,13 +39,13 @@ func PingModule() *interfaces.Module {
 						continue
 					}
 
-					response, err := (tm).Send(transport.REDIS_TYPE, "pong-app", "pingpong", "pong", []byte(`ping`), true, "")
+					_, err := (tm).Send(transport.REDIS_TYPE, "pong-app", "pingpong", "pong", []byte(`ping`), true, "")
 					if err != nil {
 						log.Error(err.Error())
 					}
-
-					fmt.Println("response from pong:")
-					fmt.Println(response)
+					counter++
+					// fmt.Println("response from pong:")
+					// fmt.Println(response)
 
 				case <-cc:
 					w.Done()
@@ -56,20 +59,6 @@ func PingModule() *interfaces.Module {
 		closeChan <- true
 
 		wg.Wait()
-	})
-
-	// module action handler to handle ping response from pong app
-	m.AddAction("ping-response", func(payload structs.Message[[]byte]) (types.Response, error) {
-		var response string
-
-		if err := payload.UnmarshalPayload(&response); err != nil {
-			log.Error(err.Error())
-			return nil, err
-		}
-
-		log.Default("received response on ping from pong-app: " + response)
-
-		return nil, nil
 	})
 
 	return &m
