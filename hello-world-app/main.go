@@ -27,6 +27,11 @@ func main() {
 				Protocol: 3,
 				PoolSize: 40,
 			},
+			Http: transport.HttpConfig{
+				On:   true,
+				Host: "0.0.0.0",
+				Port: "3030",
+			},
 		},
 	})
 

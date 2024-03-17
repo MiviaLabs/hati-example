@@ -15,7 +15,7 @@ func PongModule() *module.Module {
 		// log.Warning("  -> sending response: 'pong' to: " + payload.FromID)
 
 		return "pong", nil
-	})
+	}, nil)
 
 	return m
 }
