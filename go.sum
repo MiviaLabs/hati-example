@@ -1,3 +1,5 @@
+github.com/MiviaLabs/hati v0.1.0-dev h1:HZmGa5qV+IX6EmTOjxQpQXe4XA5mZvasND520j15CxI=
+github.com/MiviaLabs/hati v0.1.0-dev/go.mod h1:FQhfCQORJMMHqvME8jTmD8SwIbx97vT/6uPmfFCB5Mw=
 github.com/adjust/rmq/v5 v5.2.0 h1:ENPC+3i8N/LAvAfHpEpTMVl7q8zmwh4nl+hhxkao6KE=
 github.com/adjust/rmq/v5 v5.2.0/go.mod h1:FfA6MzYJHeLbuATsNYaZYZaISyxxADDXQLN9QBroFCw=
 github.com/alicebob/gopher-json v0.0.0-20200520072559-a9ecdc9d1d3a/go.mod h1:SGnFV6hVsYE877CKEZ6tDNTjaSXYUk6QqoIK6PrAtcc=

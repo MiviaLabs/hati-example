@@ -2,7 +2,7 @@ module github.com/MiviaLabs/hati-test
 
 go 1.22.0
 
-require github.com/MiviaLabs/hati v0.0.0-00010101000000-000000000000
+require github.com/MiviaLabs/hati v0.1.0-dev
 
 require (
 	github.com/adjust/rmq/v5 v5.2.0 // indirect
@@ -28,4 +28,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/MiviaLabs/hati => ../hati
+// replace github.com/MiviaLabs/hati => ../hati
